@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026 KMA 연수교육 일정</title>
+<style>
+body{margin:0;font-family:system-ui,"Noto Sans KR";background:#0b1020;color:#e9eeff}
+header,main{max-width:1100px;margin:auto;padding:18px}
+.card{border:1px solid #22305a;border-radius:12px;padding:12px;margin-bottom:10px}
+.meta{color:#9aa7c7;font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>2026 KMA 연수교육 일정</h1>
+<p class="meta">출처: edu.kma.org · 자동 업데이트</p>
+</header>
+
+<main id="list"></main>
+
+<script>
+fetch("events_2026.json")
+  .then(r=>r.json())
+  .then(events=>{
+    document.getElementById("list").innerHTML =
+      events.map(e=>`
+        <div class="card">
+          <b>${e.title}</b>
+          <div class="meta">${e.organizer}</div>
+          <div class="meta">${e.date} · ${e.venue}</div>
+          <div class="meta">${e.mode} · 평점 ${e.credits}</div>
+        </div>
+      `).join("");
+  });
+</script>
+
+</body>
+</html>
